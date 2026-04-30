@@ -1,0 +1,202 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+/* HEADER */
+header {
+    background: #222;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+
+    
+   
+}
+
+
+header {
+    border-bottom: 4px solid ;
+    border-image: linear-gradient(to right, green, blue, pink) 1;
+
+}
+
+.now {
+    background-color:#ff2ea6;
+    color: white;        
+    padding:4px;  
+    font-size:16px;
+    font-weight:bold;
+    
+}
+
+.logo {
+    display: flex;
+    align-items:flex-start;
+    gap: 1.2rem;
+
+}
+.aside {
+  background-color: grey;
+}
+
+.youcast {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+}
+
+
+.menu a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bolder;
+     position: relative;
+    text-decoration: none;
+    color: white; 
+
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 3px;
+    background: green;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+.cast-btn {
+    background: #ff2ea6;
+    padding: 8px 14px;
+    font-style: italic; 
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+}
+
+/* ASIDE */
+aside {
+    width: 260px;
+    background: #eaeaea;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+aside span {
+    background: #3cb371;
+    color: white;
+    padding: 6px;
+    margin: 20px 0 10px;
+    font-size: 14px;
+}
+
+/* LISTA USUÁRIOS */
+.user-list {
+    list-style: none;
+}
+
+.user-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.user-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-list p {
+    font-size: 13px;
+    color: gray;
+}
+
+/* TAGS */
+.tags {
+    list-style: none;
+}
+
+.tags li {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+/* MAIN */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+
+/* GRID DOS CARDS */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+
+/* IMAGEM */
+.card img{
+    width:90%;
+    height:200px;
+    object-fit:cover;
+}
+
+/* INFO */
+.info{
+    padding:10px;
+    position:relative;
+}
+
+.username{
+    font-weight:bold;
+}
+
+.views{
+    float:right;
+    color:#555;
+    font-size:14px;
+}
+
+.tag{
+    margin-top:5px;
+    color:gray;
+    font-size:14px;
+}
