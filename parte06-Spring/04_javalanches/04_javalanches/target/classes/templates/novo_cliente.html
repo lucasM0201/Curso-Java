@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: main-layout(~{::title}, ~{::main})}">
+<head>
+    <title>Javalanches - Cadastrar novo cliente</title>
+</head>
+<body>
+    <main class="container mt-4">
+        <h1>Cadastrar novo cliente</h1>
+        <hr>
+
+        <form th:action="@{/clienteSalvar}" th:object="${cliente}" method="POST" style="max-width: 600px;">
+            
+            <div class="mb-3">
+                <label for="nome" class="form-label font-weight-bold">Nome Completo</label>
+                <input type="text" th:field="*{nome}" id="nome" class="form-control" placeholder="Digite o nome do cliente" required />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cpf" class="form-label font-weight-bold">CPF</label>
+                    <input type="text" th:field="*{cpf}" id="cpf" class="form-control" placeholder="000.000.000-00" required />
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="telefone" class="form-label font-weight-bold">Telefone / WhatsApp</label>
+                    <input type="tel" th:field="*{telefone}" id="telefone" class="form-control" placeholder="(00) 00000-0000" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label font-weight-bold">E-mail</label>
+                <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="exemplo@email.com" />
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Salvar Cliente</button>
+                <a th:href="@{/clientes}" class="btn btn-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
