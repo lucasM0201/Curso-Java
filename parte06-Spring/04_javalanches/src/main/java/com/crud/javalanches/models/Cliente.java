@@ -1,9 +1,11 @@
 package com.crud.javalanches.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,9 +17,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Cliente {
-    // atributos
-    private static long serialVersionUID = 1L;
+public class Cliente implements Serializable {
+    
+    // Boa prática: Para usar o serialVersionUID, a classe deve implementar Serializable
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,25 +28,36 @@ public class Cliente {
     
     @Column(nullable = false)
     private String nome;
+
     @Column(nullable = false, unique = true, length = 14)
     private String cpf;
+
     @Column(nullable = false, unique = true)
     private String email;
+
     @Column(nullable = false, unique = true, length = 16)
     private String telefone;
+
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "endereco_id"))
+    // FIXME: completar a linha abaixo @ManyToMany para criar a relação entre Cliente e Endereco - RESOLVIDO
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+        name = "cliente_endereco", 
+        joinColumns = @JoinColumn(name = "cliente_id"), 
+        inverseJoinColumns = @JoinColumn(name = "endereco_id")
+    )
     private List<Endereco> enderecos = new ArrayList<>();
 
+    // Construtor padrão obrigatório pelo JPA
     public Cliente() {
     }
 
+    // Getters e Setters
     public long getCodigoCliente() {
         return this.codigoCliente;
     }
@@ -107,5 +121,4 @@ public class Cliente {
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
-
 }
