@@ -1,5 +1,6 @@
 package com.crud.javalanches.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,107 +9,103 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Endereco {
+public class Cliente {
+    // atributos
     private static long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long codigoEndereco;
-
-    @Column(nullable = false, length = 10)
-    private String cep;
+    private long codigoCliente;
+    
     @Column(nullable = false)
-    private String uf;
+    private String nome;
+    @Column(nullable = false, unique = true, length = 14)
+    private String cpf;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false, unique = true, length = 16)
+    private String telefone;
     @Column(nullable = false)
-    private String cidade;
-    @Column(nullable = false)
-    private String bairro;
-    @Column(nullable = false)
-    private String logradouro;
-    @Column(nullable = false)
-    private String numero;
-    @Column(length = 255)
-    private String complemento;
+    private LocalDate dataNascimento;
 
-    @ManyToMany(mappedBy = "enderecos")
-    private List<Cliente> clientes = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
-    public Endereco() {
+    @ManyToMany
+    @JoinTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "endereco_id"))
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    public Cliente() {
     }
 
-    public long getCodigoEndereco() {
-        return this.codigoEndereco;
+    public long getCodigoCliente() {
+        return this.codigoCliente;
     }
 
-    public void setCodigoEndereco(long codigoEndereco) {
-        this.codigoEndereco = codigoEndereco;
+    public void setCodigoCliente(long codigoCliente) {
+        this.codigoCliente = codigoCliente;
     }
 
-    public String getCep() {
-        return this.cep;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getUf() {
-        return this.uf;
+    public String getCpf() {
+        return this.cpf;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public String getCidade() {
-        return this.cidade;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getBairro() {
-        return this.bairro;
+    public String getTelefone() {
+        return this.telefone;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getLogradouro() {
-        return this.logradouro;
+    public LocalDate getDataNascimento() {
+        return this.dataNascimento;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public String getNumero() {
-        return this.numero;
+    public List<Pedido> getPedidos() {
+        return this.pedidos;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
-    public String getComplemento() {
-        return this.complemento;
+    public List<Endereco> getEnderecos() {
+        return this.enderecos;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public List<Cliente> getClientes() {
-        return this.clientes;
-    }
-
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
 }
