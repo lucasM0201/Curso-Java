@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: main-layout(~{::title}, ~{::main})}">
+<head>
+    <title>Javalanches - Cadastrar novo pedido</title>
+</head>
+<body>
+    <main class="container mt-4">
+        <h1>Cadastrar novo pedido</h1>
+        <hr>
+        
+        <form th:action="@{/novoPedido}" th:object="${pedido}" method="post">
+            
+            <div class="mb-3">
+                <label for="cliente" class="form-label">Cliente:</label>
+                <select id="cliente" name="clienteId" class="form-select" required>
+                    <option value="" disabled selected>Selecione um cliente</option>
+                    <option th:each="c : ${clientes}" 
+                            th:value="${c.codigoCliente}" 
+                            th:text="${c.nome}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="produto" class="form-label">Produto:</label>
+                <select id="produto" name="produtoId" class="form-select" required>
+                    <option value="" disabled selected>Selecione um produto</option>
+                    <option th:each="p : ${produtos}" 
+                            th:value="${p.id}" 
+                            th:text="${p.nome} + ' - R$ ' + ${p.preco}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="observacao" class="form-label">Observações / Opções (Ex: Sem cebola):</label>
+                <input type="text" id="observacao" th:field="*{observacao}" class="form-control" placeholder="Ex: Sem maionese, ponto da carne, etc.">
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+                <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </main>
+</body>
+</html>

@@ -44,7 +44,7 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    // FIXME: completar a linha abaixo @ManyToMany para criar a relação entre Cliente e Endereco - RESOLVIDO
+   
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "cliente_endereco", 

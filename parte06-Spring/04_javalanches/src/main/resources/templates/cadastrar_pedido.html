@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{fragments/layout :: main-layout(~{::title}, ~{::main})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Javalanches - Cadastrar Pedido</title>
+</head>
+<body>
+    <main class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title mb-0"><i class="bi bi-cart-plus"></i> Novo Pedido</h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form th:action="@{/novoPedido}" method="POST">
+                            
+                            <div class="mb-3">
+                                <label for="clienteId" class="form-label fw-bold">Cliente:</label>
+                                <select class="form-select" id="clienteId" name="clienteId" required>
+                                    <option value="" disabled selected>Selecione o cliente que está comprando...</option>
+                                    <option th:each="cliente : ${listaClientes}" 
+                                            th:value="${cliente.id}" 
+                                            th:text="${cliente.nome}">
+                                        Nome do Cliente
+                                    </option>
+                                </select>
+                                <div class="form-text">Caso o cliente não apareça, certifique-se de cadastrá-lo primeiro.</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label for="produtoId" class="form-label fw-bold">Produto / Lanche:</label>
+                                    <select class="form-select" id="produtoId" name="produtoId" required>
+                                        <option value="" disabled selected>Selecione um produto...</option>
+                                        <option th:each="produto : ${listaProdutos}" 
+                                                th:value="${produto.codigoProduto}" 
+                                                th:text="${produto.nomeProduto} + ' - R$ ' + ${produto.precoProduto}">
+                                            X-Java - R$ 24.90
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="quantidade" class="form-label fw-bold">Quantidade:</label>
+                                    <input type="number" class="form-control" id="quantidade" name="quantidade" 
+                                           min="1" value="1" required>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a th:href="@{/}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-success btn-lg px-4">
+                                    <i class="bi bi-check-circle"></i> Concluir Pedido
+                                </button>
+                            </div>
+
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
