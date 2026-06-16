@@ -22,43 +22,53 @@
                 <div th:unless="${clientes.empty}">
                     <div class="accordion" id="accordionClientes">
                         <div class="accordion-item" th:each="cliente, status : ${clientes}">
-                            <h2 class="accordion-header" th:attr="id=${'heading-' + cliente.codigoCliente}">
+                            <h2 class="accordion-header" th:attr="id=${'heading-' + cliente?.codigoCliente}">
                                 <button class="accordion-button" th:classappend="${status.index == 0} ? '' : ' collapsed'" type="button"
                                     data-bs-toggle="collapse"
-                                    th:attr="data-bs-target=${'#collapse-' + cliente.codigoCliente}, aria-expanded=${status.index == 0}, aria-controls=${'collapse-' + cliente.codigoCliente}">
-                                    <span th:text="${cliente.codigoCliente}"></span>
+                                    th:attr="data-bs-target=${'#collapse-' + cliente?.codigoCliente}, aria-expanded=${status.index == 0}, aria-controls=${'collapse-' + cliente?.codigoCliente}">
+                                    <span th:text="${cliente?.codigoCliente}"></span>
                                     <span class="mx-2">-</span>
-                                    <span th:text="${cliente.nome}"></span>
+                                    <span th:text="${cliente?.nome}"></span>
                                 </button>
                             </h2>
-                            <div th:attr="id=${'collapse-' + cliente.codigoCliente}"
+                            <div th:attr="id=${'collapse-' + cliente?.codigoCliente}"
                                 th:class="${status.index == 0} ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
                                 data-bs-parent="#accordionClientes">
                                 <div class="accordion-body">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <strong>CPF:</strong>
-                                            <span th:text="${cliente.cpf}"></span>
+                                            <span th:text="${cliente?.cpf}"></span>
                                         </div>
                                         <div class="col-md-6">
                                             <strong>Email:</strong>
-                                            <span th:text="${cliente.email}"></span>
+                                            <span th:text="${cliente?.email}"></span>
                                         </div>
+                                        
                                         <div class="col-md-6">
                                             <strong>Telefone:</strong>
-                                            <span th:text="${cliente.telefone}"></span>
+                                            <span th:text="${cliente?.telefone}"></span>
                                         </div>
                                         <div class="col-md-6">
                                             <strong>Data de nascimento:</strong>
-                                            <span th:text="${cliente.dataNascimento}"></span>
+                                            <span th:text="${cliente?.dataNascimento}"></span>
                                         </div>
                                     </div>
                                     <div class="mt-4">
                                         <h3 class="h6 mb-3">Endereços</h3>
                                         <div class="mb-3">
-                                            <!-- TODO: botão novo endereço -->
-                                        </div>
+                                            </div>
                                     </div>
+                                    
+                                    <hr class="text-muted">
+                                    <div class="d-flex justify-content-end">
+                                        <a th:href="@{/deletarCliente(codigoCliente=${cliente?.codigoCliente})}" 
+                                           class="btn btn-outline-danger btn-sm" 
+                                           onclick="return confirm('Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.');">
+                                           Deletar Cliente
+                                        </a>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

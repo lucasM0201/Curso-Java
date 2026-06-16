@@ -3,16 +3,17 @@
     th:replace="~{fragments/layout :: main-layout(~{::title}, ~{::main})}">
 
 <head>
-    <title>Javalanches - Cadastrar novo cliente</title>
+    <title>Javalanches - Cadastrar novo endereço</title>
 </head>
 
 <body>
     <main>
         <h1 class="mb-5">Cadastrar novo endereço</h1>
-        <form method="POST">
+        <form method="POST" th:action="@{/novoEndereco}">
             <div class="row">
-                <h2 class="mt-5">Endereço</h2>
+                <h2 class="mt-5">Novo endereço do <span th:text="${cliente.nome}"></span></h2>
                 <hr>
+                <input type="hidden" name="codigoCliente" th:value="${cliente.codigoCliente}">
                 <!-- cep -->
                 <div class="col-12 col-md-4 col-lg-3 mb-3">
                     <label for="cep" class="form-label">CEP</label>
@@ -56,27 +57,7 @@
         </form>
 
         <script>
-            const form = document.querySelector('form');
-            const maskCpf = document.querySelector('#cpf');
-            const maskTel = document.querySelector('#telefone');
             const cep = document.querySelector('#cep');
-
-            // máscaras de entrada
-            maskCpf.addEventListener('input', function () {
-                this.value = this.value
-                    .replace(/\D/g, '')
-                    .replace(/(\d{3})(\d)/, '$1.$2')
-                    .replace(/(\d{3})(\d)/, '$1.$2')
-                    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            });
-
-            maskTel.addEventListener('input', function () {
-                this.value = this.value
-                    .replace(/\D/g, '')
-                    .replace(/(\d{2})(\d)/, '($1) $2')
-                    .replace(/(\d{4,5})(\d)/, '$1-$2')
-                    .replace(/(\d{4})\d+?$/, '$1');
-            });
 
             // consumo da api
             const limparFormularioCep = () => {
